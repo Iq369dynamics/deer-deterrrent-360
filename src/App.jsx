@@ -1,9 +1,11 @@
+import { useState, useRef } from 'react'
 import './App.css'
 import { Button } from './components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'
 import { Input } from './components/ui/input'
 import { Badge } from './components/ui/badge'
 import { Separator } from './components/ui/separator'
+import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react'
 import dd360Logo from './assets/dd360-logo.jpg'
 import heroImage from './assets/hero-image.png'
 import appScreens from './assets/app-screens.jpg'
@@ -11,6 +13,53 @@ import adhesivePatch from './assets/adhesive-patch.jpg'
 import deerCrossingSign from './assets/deer-crossing-sign.jpg'
 
 function App() {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const [videoProgress, setVideoProgress] = useState(0)
+  const [isMuted, setIsMuted] = useState(false)
+  const videoRef = useRef(null)
+
+  const handlePlayPause = () => {
+    if (videoRef.current) {
+      if (isVideoPlaying) {
+        videoRef.current.pause()
+      } else {
+        videoRef.current.play()
+      }
+      setIsVideoPlaying(!isVideoPlaying)
+    }
+  }
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      const progress = (videoRef.current.currentTime / videoRef.current.duration) * 100
+      setVideoProgress(progress)
+    }
+  }
+
+  const handleVideoEnded = () => {
+    setIsVideoPlaying(false)
+    setVideoProgress(0)
+  }
+
+  const toggleFullscreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen()
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        videoRef.current.webkitRequestFullscreen()
+      } else if (videoRef.current.msRequestFullscreen) {
+        videoRef.current.msRequestFullscreen()
+      }
+    }
+  }
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted
+      setIsMuted(!isMuted)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -129,6 +178,111 @@ function App() {
           <h2 className="text-3xl font-bold text-primary mb-8">See the DD360 App in Action</h2>
           <div className="max-w-4xl mx-auto">
             <img src={appScreens} alt="DD360 App Screens" className="w-full h-auto rounded-lg shadow-lg" />
+          </div>
+        </div>
+      </section>
+
+      {/* Video Player Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-primary mb-4">Watch DD360 in Action</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              See how our Deer Deterrent 360 system protects drivers and wildlife through advanced technology and real-time alerts.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="relative bg-primary/5 rounded-lg shadow-lg overflow-hidden border-2 border-accent/20">
+              <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 relative">
+                {/* Video element */}
+                <video
+                  ref={videoRef}
+                  className="w-full h-full object-cover absolute inset-0"
+                  muted={isMuted}
+                  onTimeUpdate={handleTimeUpdate}
+                  onEnded={handleVideoEnded}
+                  onClick={handlePlayPause}
+                >
+                  <source src="/1000012784.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+                {/* Play/Pause button overlay - shown when not playing */}
+                {!isVideoPlaying && (
+                  <div className="absolute inset-0 flex items-center justify-center cursor-pointer" onClick={handlePlayPause}>
+                    <div className="text-center space-y-4">
+                      <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto shadow-lg hover:bg-accent/80 transition-colors">
+                        <Play className="w-8 h-8 text-accent-foreground ml-1" fill="currentColor" />
+                      </div>
+                      <div className="space-y-2">
+                        <h3 className="text-xl font-semibold text-primary">Watch Demo</h3>
+                        <p className="text-muted-foreground">See DD360 in action</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Video Controls */}
+              <div className="bg-primary/90 text-primary-foreground px-4 py-3 flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <button
+                    onClick={handlePlayPause}
+                    className="w-8 h-8 bg-accent rounded-full flex items-center justify-center hover:bg-accent/80 transition-colors"
+                  >
+                    {isVideoPlaying ? (
+                      <Pause className="w-4 h-4 text-accent-foreground" />
+                    ) : (
+                      <Play className="w-4 h-4 text-accent-foreground ml-0.5" fill="currentColor" />
+                    )}
+                  </button>
+                  <div className="text-sm">
+                    <span className="text-accent">
+                      {videoRef.current ? new Date(videoRef.current.currentTime * 1000).toISOString().substr(14, 5) : '00:00'}
+                    </span>
+                    <span className="mx-1">/</span>
+                    <span>
+                      {videoRef.current ? new Date(videoRef.current.duration * 1000).toISOString().substr(14, 5) : '00:00'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2 flex-1 mx-4">
+                  <div className="w-full h-1 bg-primary-foreground/20 rounded-full cursor-pointer">
+                    <div
+                      className="h-full bg-accent rounded-full transition-all"
+                      style={{width: `${videoProgress}%`}}
+                    ></div>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={toggleMute}
+                    className="w-6 h-6 text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                  >
+                    {isMuted ? (
+                      <VolumeX className="w-full h-full" />
+                    ) : (
+                      <Volume2 className="w-full h-full" />
+                    )}
+                  </button>
+                  <button
+                    onClick={toggleFullscreen}
+                    className="w-6 h-6 text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                  >
+                    <Maximize className="w-full h-full" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 text-center">
+              <p className="text-sm text-muted-foreground">
+                Watch our demonstration video to see how DD360 technology works to protect you on the road.
+              </p>
+            </div>
           </div>
         </div>
       </section>

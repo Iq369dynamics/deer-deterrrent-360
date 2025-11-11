@@ -90,13 +90,38 @@ function App() {
                 deer can suddenly dart into roadways, especially in suburban communities where hunting is not allowed. 
                 This poses a considerable risk to drivers, leading to costly repairs and potential injuries.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-black text-white hover:bg-gray-800">
-                  Download on the App Store
-                </Button>
-                <Button className="bg-black text-white hover:bg-gray-800">
-                  Get it on Google Play
-                </Button>
+              <div className="space-y-4">
+                <h2 className="text-xl font-semibold text-gray-800">Download DD360 App</h2>
+                <div className="grid grid-cols-2 gap-4 max-w-xl">
+                  <a href="#" className="transform hover:scale-105 transition-transform duration-200" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="/google-play-badge.png"
+                      alt="Get it on Google Play"
+                      className="w-full h-auto"
+                    />
+                  </a>
+                  <a href="#" className="transform hover:scale-105 transition-transform duration-200" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="/app-store-badge.png"
+                      alt="Download on the App Store"
+                      className="w-full h-auto"
+                    />
+                  </a>
+                  <a href="#" className="transform hover:scale-105 transition-transform duration-200" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="/amazon-appstore-badge.png"
+                      alt="Available at Amazon Appstore"
+                      className="w-full h-auto"
+                    />
+                  </a>
+                  <a href="#" className="transform hover:scale-105 transition-transform duration-200" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="/huawei-appgallery-badge.png"
+                      alt="Explore it on AppGallery"
+                      className="w-full h-auto"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
             <div className="lg:w-1/2">

@@ -382,7 +382,11 @@ function App() {
                   <li>• Mobile app integration</li>
                   <li>• Real-time alerts</li>
                 </ul>
-                <Button className="w-full">Choose Small</Button>
+                <Button className="w-full" asChild>
+                  <a href="https://buy.stripe.com/00wfZa9MN6tw5Fc7UXes002" target="_blank" rel="noopener noreferrer">
+                    Choose Small
+                  </a>
+                </Button>
               </CardContent>
             </Card>
 
@@ -399,7 +403,11 @@ function App() {
                   <li>• Social media alerts</li>
                   <li>• Road reporting analysis</li>
                 </ul>
-                <Button className="w-full">Choose Medium</Button>
+                <Button className="w-full" asChild>
+                  <a href="https://buy.stripe.com/5kQ8wI6AB0584B8grtes001" target="_blank" rel="noopener noreferrer">
+                    Choose Medium
+                  </a>
+                </Button>
               </CardContent>
             </Card>
 
@@ -416,7 +424,11 @@ function App() {
                   <li>• Real-time data analytics</li>
                   <li>• Statistics data tracking</li>
                 </ul>
-                <Button className="w-full">Choose Large</Button>
+                <Button className="w-full" asChild>
+                  <a href="https://buy.stripe.com/4gM3coe33aJMc3A3EHes000" target="_blank" rel="noopener noreferrer">
+                    Choose Large
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           </div>

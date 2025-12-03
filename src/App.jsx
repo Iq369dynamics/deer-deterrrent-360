@@ -7,7 +7,7 @@ import { Badge } from './components/ui/badge'
 import { Separator } from './components/ui/separator'
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react'
 import dd360Logo from './assets/dd360-logo.jpg'
-import heroImage from './assets/hero-image.png'
+import heroImage from './assets/hero-image1.png'
 import appScreens from './assets/app-screens.jpg'
 import adhesivePatch from './assets/adhesive-patch.jpg'
 import deerCrossingSign from './assets/deer-crossing-sign.jpg'
@@ -229,7 +229,7 @@ function App() {
                   onEnded={handleVideoEnded}
                   onClick={handlePlayPause}
                 >
-                  <source src="/1000012784.mp4" type="video/mp4" />
+                  <source src="/1000013447.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
 

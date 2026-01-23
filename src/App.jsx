@@ -122,6 +122,22 @@ function App() {
                     />
                   </a>
                 </div>
+                {/* Web App Launch Button */}
+                <div className="pt-2">
+                  <a
+                    href="https://deer-deterrent-360-6f6bb986.base44.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary hover:text-white bg-accent/20 hover:bg-primary border border-primary/30 hover:border-primary rounded-full transition-all duration-300"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Launch Web App
+                  </a>
+                </div>
               </div>
             </div>
             <div className="lg:w-1/2">

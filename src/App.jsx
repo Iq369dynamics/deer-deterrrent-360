@@ -7,12 +7,15 @@ import { Badge } from './components/ui/badge'
 import { Separator } from './components/ui/separator'
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react'
 import dd360Logo from './assets/dd360-logo.jpg'
-import heroImage from './assets/hero-image1.png'
+import heroImage from './assets/hero-image2.jpeg'
 import appScreens from './assets/app-screens.jpg'
 import adhesivePatch from './assets/adhesive-patch.jpg'
 import deerCrossingSign from './assets/deer-crossing-sign.jpg'
+import { SignupPopup } from './components/SignupPopup'
+import { FooterSocial } from './components/FooterSocial'
 
 function App() {
+  const [signupOpen, setSignupOpen] = useState(false)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [videoProgress, setVideoProgress] = useState(0)
   const [isMuted, setIsMuted] = useState(false)
@@ -69,14 +72,25 @@ function App() {
             <img src={dd360Logo} alt="DD360 Logo" className="h-12 w-12 rounded-full" />
             <span className="text-xl font-bold">DEER DETERRENT 360</span>
           </div>
-          <nav className="hidden md:flex space-x-6">
-            <a href="#home" className="hover:text-accent transition-colors">Home</a>
-            <a href="#packages" className="hover:text-accent transition-colors">Packages</a>
-            <a href="#about" className="hover:text-accent transition-colors">About us</a>
-            <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
-          </nav>
+          <div className="flex items-center gap-4">
+            <nav className="hidden md:flex space-x-6">
+              <a href="#home" className="hover:text-accent transition-colors">Home</a>
+              <a href="#packages" className="hover:text-accent transition-colors">Packages</a>
+              <a href="#about" className="hover:text-accent transition-colors">About us</a>
+              <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
+            </nav>
+            <button
+              type="button"
+              onClick={() => setSignupOpen(true)}
+              className="cursor-pointer bg-accent text-accent-foreground font-semibold px-4 py-2 rounded-md shadow-md hover:bg-accent/90 hover:shadow-lg transition-all"
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
       </header>
+
+      <SignupPopup open={signupOpen} onClose={() => setSignupOpen(false)} />
 
       {/* Hero Section */}
       <section id="home" className="bg-gradient-to-r from-accent/20 to-primary/10 py-16">
@@ -140,8 +154,12 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="lg:w-1/2">
-              <img src={heroImage} alt="DD360 Road Safety App & Patch" className="w-full h-auto rounded-lg shadow-lg" />
+            <div className="lg:w-1/2 flex justify-center">
+              <img
+                src={heroImage}
+                alt="DD360 Road Safety App & Patch"
+                className="w-full max-w-md sm:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </div>
@@ -612,12 +630,13 @@ function App() {
       {/* Footer */}
       <footer className="bg-primary text-primary-foreground py-8">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-3 mb-4 md:mb-0">
+          <div className="flex flex-col items-center gap-8 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-center space-x-3">
               <img src={dd360Logo} alt="DD360 Logo" className="h-8 w-8 rounded-full" />
               <span className="font-bold">DEER DETERRENT 360</span>
             </div>
-            <div className="text-sm text-center md:text-right">
+            <FooterSocial />
+            <div className="text-center text-sm text-primary-foreground/80 md:text-right">
               <p>Copyright ©2024 Deerdeterrent360. Powered by IQ360DYNAMICS</p>
             </div>
           </div>

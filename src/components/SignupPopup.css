@@ -1,0 +1,517 @@
+/* DD360 Early Access Signup popup */
+
+.signup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+.signup-popup {
+  position: relative;
+  width: 100%;
+  max-width: 590px;
+  background: linear-gradient(170deg, #0f1e2e 0%, #0a1a0a 50%, #060e06 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(232, 163, 32, 0.2);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(232, 163, 32, 0.08);
+  overflow: hidden;
+  margin: auto;
+}
+
+.signup-popup::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #0a1a0a, #e8a320, #f5c842, #e8a320, #0a1a0a);
+  background-size: 300% 100%;
+  animation: signup-shimmer 3s linear infinite;
+}
+
+@keyframes signup-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.signup-close-btn {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(247, 242, 232, 0.45);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.signup-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f7f2e8;
+}
+
+.signup-header {
+  padding: 26px 32px 20px;
+  border-bottom: 1px solid rgba(232, 163, 32, 0.1);
+}
+
+.signup-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.signup-logo-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(232, 163, 32, 0.55);
+  box-shadow: 0 0 20px rgba(232, 163, 32, 0.3), 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.signup-logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.signup-brand-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.signup-brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  color: #f7f2e8;
+  line-height: 1;
+}
+
+.signup-brand-sub {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(247, 242, 232, 0.4);
+  letter-spacing: 0.02em;
+}
+
+.signup-launch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232, 163, 32, 0.1);
+  border: 1px solid rgba(232, 163, 32, 0.4);
+  border-radius: 3px;
+  padding: 4px 10px;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #f5c842;
+  width: fit-content;
+}
+
+.signup-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f5c842;
+  animation: signup-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes signup-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.signup-stat-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.signup-stat-pill {
+  background: rgba(14, 30, 18, 0.8);
+  border: 1px solid rgba(232, 163, 32, 0.2);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 11px;
+  color: rgba(247, 242, 232, 0.55);
+  line-height: 1.3;
+}
+
+.signup-stat-pill b {
+  color: #f5c842;
+  font-size: 14px;
+  display: block;
+}
+
+.signup-popup h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: #f7f2e8;
+  margin-bottom: 10px;
+}
+
+.signup-popup h1 em {
+  color: #f5c842;
+  font-style: normal;
+  display: block;
+}
+
+.signup-subhead {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(247, 242, 232, 0.55);
+  line-height: 1.6;
+}
+
+.signup-subhead b {
+  color: #7ab87a;
+  font-weight: 500;
+}
+
+.signup-urgency-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.signup-track {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.signup-fill {
+  height: 100%;
+  width: 34%;
+  background: linear-gradient(90deg, #2d5c2d, #f5c842);
+  border-radius: 3px;
+  animation: signup-grow 1.6s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes signup-grow {
+  from { width: 0; }
+  to { width: 34%; }
+}
+
+.signup-spots-txt {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(247, 242, 232, 0.38);
+  white-space: nowrap;
+}
+
+.signup-spots-txt b {
+  color: #f5c842;
+}
+
+.signup-form-body {
+  padding: 22px 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.signup-row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+
+.signup-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.signup-field > label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(100, 160, 100, 0.9);
+}
+
+.signup-req {
+  color: #e8a320;
+  margin-left: 2px;
+}
+
+.signup-opt {
+  color: rgba(255, 255, 255, 0.2);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 9.5px;
+  margin-left: 4px;
+}
+
+.signup-field input,
+.signup-field select {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(100, 160, 100, 0.2);
+  border-radius: 4px;
+  color: #f7f2e8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  padding: 10px 13px;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.signup-field input::placeholder {
+  color: rgba(247, 242, 232, 0.16);
+}
+
+.signup-field input:focus,
+.signup-field select:focus {
+  outline: none;
+  border-color: rgba(232, 163, 32, 0.6);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 3px rgba(232, 163, 32, 0.1);
+}
+
+.signup-field input.err,
+.signup-field select.err {
+  border-color: rgba(200, 60, 40, 0.65) !important;
+}
+
+.signup-field select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%236b9e6b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 36px;
+}
+
+.signup-field select option {
+  background: #0a1a0a;
+}
+
+.signup-svc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.signup-svc {
+  position: relative;
+}
+
+.signup-svc input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.signup-svc label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(100, 160, 100, 0.15);
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(247, 242, 232, 0.6);
+  line-height: 1.3;
+  transition: all 0.15s;
+}
+
+.signup-svc label .plan-price {
+  font-size: 10.5px;
+  font-weight: 300;
+  color: rgba(247, 242, 232, 0.45);
+  display: block;
+  margin-top: 1px;
+}
+
+.signup-svc label small {
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(247, 242, 232, 0.28);
+  display: block;
+  margin-top: 2px;
+}
+
+.signup-svc input:checked + label {
+  background: rgba(232, 163, 32, 0.1);
+  border-color: rgba(232, 163, 32, 0.55);
+  color: #f7f2e8;
+}
+
+.signup-svc label:hover {
+  background: rgba(100, 160, 100, 0.08);
+  border-color: rgba(100, 160, 100, 0.35);
+}
+
+.signup-svc-grid.svc-err label {
+  border-color: rgba(200, 60, 40, 0.5) !important;
+}
+
+.signup-cta {
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #bf7a0e, #e8a320 45%, #d4920c 75%, #a86209);
+  border: none;
+  border-radius: 5px;
+  color: #1a1000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 21px;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 22px rgba(232, 163, 32, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.signup-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+
+.signup-cta:hover::after {
+  transform: translateX(100%);
+}
+
+.signup-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px rgba(232, 163, 32, 0.45);
+}
+
+.signup-cta:active {
+  transform: translateY(0);
+}
+
+.signup-foot {
+  text-align: center;
+  font-size: 10px;
+  color: rgba(247, 242, 232, 0.22);
+  padding: 14px 32px 20px;
+  line-height: 1.6;
+}
+
+.signup-foot a {
+  color: rgba(100, 160, 100, 0.6);
+  text-decoration: none;
+}
+
+.signup-foot a:hover {
+  color: rgba(100, 160, 100, 0.9);
+}
+
+.signup-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 52px 32px;
+  gap: 16px;
+}
+
+.signup-success-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(232, 163, 32, 0.55);
+  box-shadow: 0 0 28px rgba(232, 163, 32, 0.35);
+  animation: signup-pop-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.signup-success-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes signup-pop-in {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.signup-success h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px;
+  letter-spacing: 0.04em;
+  color: #f7f2e8;
+}
+
+.signup-success p {
+  font-size: 13.5px;
+  color: rgba(247, 242, 232, 0.5);
+  max-width: 370px;
+  line-height: 1.65;
+}
+
+.signup-success .note {
+  font-size: 11px;
+  color: rgba(247, 242, 232, 0.24);
+  margin-top: 4px;
+}
+
+@media (max-width: 500px) {
+  .signup-row2 {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-popup h1 {
+    font-size: 34px;
+  }
+
+  .signup-header,
+  .signup-form-body {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .signup-foot {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .signup-stat-row {
+    gap: 7px;
+  }
+
+  .signup-stat-pill {
+    padding: 5px 9px;
+  }
+}

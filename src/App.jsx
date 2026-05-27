@@ -298,11 +298,11 @@ function App() {
                   </button>
                   <div className="text-sm">
                     <span className="text-accent">
-                      {videoRef.current ? new Date(videoRef.current.currentTime * 1000).toISOString().substr(14, 5) : '00:00'}
+                      {videoRef.current && isFinite(videoRef.current.currentTime) ? new Date(videoRef.current.currentTime * 1000).toISOString().substr(14, 5) : '00:00'}
                     </span>
                     <span className="mx-1">/</span>
                     <span>
-                      {videoRef.current ? new Date(videoRef.current.duration * 1000).toISOString().substr(14, 5) : '00:00'}
+                      {videoRef.current && isFinite(videoRef.current.duration) ? new Date(videoRef.current.duration * 1000).toISOString().substr(14, 5) : '00:00'}
                     </span>
                   </div>
                 </div>

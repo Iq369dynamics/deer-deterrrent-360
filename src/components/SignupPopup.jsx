@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import dd360Logo from '../assets/dd360-logo.jpg'
+import { isEmailJsConfigured, sendSignupEmail } from '../lib/emailjs'
 import './SignupPopup.css'
 
 const US_STATES = [
@@ -54,14 +55,19 @@ export function SignupPopup({ open, onClose }) {
   const [errors, setErrors] = useState({})
   const [svcError, setSvcError] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+
+  const [isMounted, setIsMounted] = useState(open)
+  const [isClosing, setIsClosing] = useState(false)
 
   useEffect(() => {
-    if (!open) return
+    if (!isMounted) return
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = ''
     }
-  }, [open])
+  }, [isMounted])
 
   useEffect(() => {
     if (!open) return
@@ -73,7 +79,11 @@ export function SignupPopup({ open, onClose }) {
   }, [open, onClose])
 
   useEffect(() => {
-    if (!open) {
+    if (open) {
+      setIsMounted(true)
+      setIsClosing(false)
+
+      // Reset when opening to keep behavior consistent.
       setFirstName('')
       setLastName('')
       setEmail('')
@@ -83,10 +93,22 @@ export function SignupPopup({ open, onClose }) {
       setErrors({})
       setSvcError(false)
       setSubmitted(false)
+      setIsSubmitting(false)
+      setSubmitError('')
+      return
+    }
+
+    if (!open && isMounted) {
+      setIsClosing(true)
+      const t = window.setTimeout(() => {
+        setIsMounted(false)
+        setIsClosing(false)
+      }, 320)
+      return () => window.clearTimeout(t)
     }
   }, [open])
 
-  if (!open) return null
+  if (!isMounted) return null
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) onClose()
@@ -115,33 +137,49 @@ export function SignupPopup({ open, onClose }) {
     return Object.keys(nextErrors).length === 0 && !planMissing
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!validate()) return
 
-    const payload = {
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      email: email.trim(),
-      state,
-      phone: phone.trim() || null,
-      plan,
-      timestamp: new Date().toISOString(),
-      source: 'dd360-popup',
+    if (!isEmailJsConfigured()) {
+      setSubmitError(
+        'Email service is not configured yet. Please add your EmailJS keys to the .env file and restart the dev server.',
+      )
+      return
     }
-    console.log('DD360 Lead:', payload)
-    setSubmitted(true)
+
+    setIsSubmitting(true)
+    setSubmitError('')
+
+    try {
+      await sendSignupEmail({
+        firstName,
+        lastName,
+        email,
+        state,
+        phone,
+        plan,
+      })
+      setSubmitted(true)
+    } catch (err) {
+      console.error('EmailJS signup error:', err)
+      setSubmitError(
+        'We could not send your signup right now. Please try again in a moment or contact support.',
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <div
-      className="signup-overlay"
+      className={`signup-overlay ${open && !isClosing ? 'is-open' : 'is-closing'}`}
       role="dialog"
       aria-modal="true"
       aria-labelledby="signup-title"
       onClick={handleOverlayClick}
     >
-      <div className="signup-popup">
+      <div className={`signup-popup ${open && !isClosing ? 'is-open' : 'is-closing'}`}>
         <button
           type="button"
           className="signup-close-btn"
@@ -317,8 +355,14 @@ export function SignupPopup({ open, onClose }) {
                 </div>
               </div>
 
-              <button type="submit" className="signup-cta">
-                🚨&nbsp; Claim My Free Early Access Spot
+              {submitError ? (
+                <p className="signup-submit-error" role="alert">
+                  {submitError}
+                </p>
+              ) : null}
+
+              <button type="submit" className="signup-cta" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending…' : '🚨\u00a0 Claim My Free Early Access Spot'}
               </button>
             </form>
 

@@ -10,6 +10,13 @@
   padding: 20px;
   z-index: 9999;
   overflow-y: auto;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.signup-popup {
+  opacity: 0;
+  transform: translateY(22px);
 }
 
 .signup-popup {
@@ -22,6 +29,52 @@
   box-shadow: 0 40px 90px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(232, 163, 32, 0.08);
   overflow: hidden;
   margin: auto;
+}
+
+.signup-popup {
+  will-change: transform, opacity;
+}
+
+.signup-overlay.is-open {
+  /* Opening choreography:
+     - wait 0.15s, then fade in the backdrop */
+  animation: signup-overlay-fade-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.15s;
+}
+
+.signup-overlay.is-closing {
+  pointer-events: none;
+  animation: signup-overlay-fade-out 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.signup-popup.is-open {
+  animation: signup-popup-slide-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.3s;
+}
+
+.signup-popup.is-closing {
+  pointer-events: none;
+  animation: signup-popup-slide-down 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes signup-overlay-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes signup-overlay-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes signup-popup-slide-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes signup-popup-slide-down {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(22px); }
 }
 
 .signup-popup::before {
@@ -418,6 +471,24 @@
 
 .signup-cta:active {
   transform: translateY(0);
+}
+
+.signup-cta:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
+  box-shadow: 0 4px 22px rgba(232, 163, 32, 0.2);
+}
+
+.signup-submit-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #ffb4a8;
+  background: rgba(200, 60, 40, 0.12);
+  border: 1px solid rgba(200, 60, 40, 0.35);
 }
 
 .signup-foot {

@@ -635,9 +635,19 @@ function App() {
               <img src={dd360Logo} alt="DD360 Logo" className="h-8 w-8 rounded-full" />
               <span className="font-bold">DEER DETERRENT 360</span>
             </div>
-            <FooterSocial />
+            <div className="flex flex-col items-center gap-4">
+              <FooterSocial />
+              <a
+                href="https://preview--dd360-brand-mint.lovable.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full border border-primary-foreground/20 bg-accent px-6 py-2.5 text-sm font-semibold text-accent-foreground shadow-sm transition-all duration-200 hover:bg-accent/90 hover:shadow-md"
+              >
+                NFT Collection
+              </a>
+            </div>
             <div className="text-center text-sm text-primary-foreground/80 md:text-right">
-              <p>Copyright ©2024 Deerdeterrent360. Powered by IQ360DYNAMICS</p>
+              <p>Copyright ©2023 Deerdeterrent360. Powered by IQ360DYNAMICS</p>
             </div>
           </div>
         </div>

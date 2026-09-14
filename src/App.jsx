@@ -8,7 +8,7 @@ import { Separator } from './components/ui/separator'
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react'
 import dd360Logo from './assets/dd360-logo-mark.png'
 import heroImage from './assets/hero-image3.jpeg'
-import appScreens from './assets/app-screens2.jpeg'
+import appScreens from './assets/app-screens3.png'
 import adhesivePatch from './assets/adhesive-patch.jpg'
 import deerCrossingSign from './assets/deer-crossing-sign.jpg'
 import { SignupPopup } from './components/SignupPopup'
@@ -236,7 +236,7 @@ function App() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-primary mb-8">See the DD360 App in Action</h2>
           <div className="max-w-4xl mx-auto">
-            <img src={appScreens} alt="DD360 App Screens" className="w-full h-auto rounded-lg shadow-lg" />
+            <img src={appScreens} alt="DD360 App Screens" className="w-full h-auto" />
           </div>
         </div>
       </section>

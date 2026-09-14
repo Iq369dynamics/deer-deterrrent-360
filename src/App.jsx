@@ -6,8 +6,8 @@ import { Input } from './components/ui/input'
 import { Badge } from './components/ui/badge'
 import { Separator } from './components/ui/separator'
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react'
-import dd360Logo from './assets/dd360-logo.jpg'
-import heroImage from './assets/hero-image2.jpeg'
+import dd360Logo from './assets/dd360-logo-mark.png'
+import heroImage from './assets/hero-image3.jpeg'
 import appScreens from './assets/app-screens.jpg'
 import adhesivePatch from './assets/adhesive-patch.jpg'
 import deerCrossingSign from './assets/deer-crossing-sign.jpg'
@@ -69,7 +69,7 @@ function App() {
       <header className="bg-primary text-primary-foreground shadow-lg">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <img src={dd360Logo} alt="DD360 Logo" className="h-12 w-12 rounded-full" />
+            <img src={dd360Logo} alt="DD360 Logo" className="h-12 w-12 object-contain" />
             <span className="text-xl font-bold">DEER DETERRENT 360</span>
           </div>
           <div className="flex items-center gap-4">
@@ -632,7 +632,7 @@ function App() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-8 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center space-x-3">
-              <img src={dd360Logo} alt="DD360 Logo" className="h-8 w-8 rounded-full" />
+              <img src={dd360Logo} alt="DD360 Logo" className="h-8 w-8 object-contain" />
               <span className="font-bold">DEER DETERRENT 360</span>
             </div>
             <div className="flex flex-col items-center gap-4">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import dd360Logo from '../assets/dd360-logo.jpg'
+import dd360Logo from '../assets/dd360-logo-mark.png'
 import { isEmailJsConfigured, sendSignupEmail } from '../lib/emailjs'
 import './SignupPopup.css'
 
